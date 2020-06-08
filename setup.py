@@ -17,6 +17,6 @@ setup(
     # url='https://github.com/szmgithubcode/',
     url='https://github.com/reydx/dx_tools',
     #packages=find_packages(),
-    packages=['scripts'],
+    packages=['dx_tools'],
     #install_requires=['requests'],
 )
