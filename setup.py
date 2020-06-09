@@ -10,7 +10,7 @@
 from setuptools import find_packages, setup
 setup(
     name='dx_tools',
-    version='1.0.1',
+    version='1.0.2',
     description='tools',
     author='Rey',
     author_email='czp_fist@163.com',
