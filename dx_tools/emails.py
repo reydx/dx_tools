@@ -44,11 +44,12 @@ class Email(object):
         name, addr = parseaddr(s)
         return formataddr((Header(name, "utf-8").encode(), addr))
 
-    def send_email(self, content: str, subject: str,) -> bool:
+    def send_email(self, content: str, subject: str, reporter: str = "BugReporter") -> bool:
         """
         发送邮件
         :param content: 邮件内容
         :param subject: 邮件主题
+        :param reporter: 发件人别名
         :return: 成功True, 失败False
         """
         # smtp服务器信息
@@ -63,7 +64,7 @@ class Email(object):
         # 邮件信息
         subject = subject
         msg = MIMEText(_text=content, _subtype="plain", _charset="utf-8")
-        msg["From"] = self._format_addr(f'BugReporter<{from_addr}>')
+        msg["From"] = self._format_addr(f'{reporter}<{from_addr}>')
         msg["To"] = to_addr
         msg["Subject"] = Header(subject)
 
@@ -79,15 +80,3 @@ class Email(object):
         finally:
             server.quit()
         return True
-
-
-if __name__ == '__main__':
-    params = {
-        "from_addr": "czp_first@163.com",
-        # "to_addr_in": "czp_first@163.com",
-        "to_addr_in": "czp_first@163.com, czp_second@163.com",
-        "password": "DBGYKECPHWMGUMKG",
-    }
-
-    email = Email(**params)
-    email.send_email(subject="new edition", content="alter")
